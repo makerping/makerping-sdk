@@ -15,7 +15,7 @@ async function consumerExample(t, relative) {
   const directory=await mkdtemp(join(tmpdir(),'makerping-example-'));
   t.after(()=>rm(directory,{recursive:true,force:true}));
   await mkdir(join(directory,'node_modules/@makerping'),{recursive:true});
-  await symlink(fileURLToPath(new URL('../',import.meta.url)),join(directory,'node_modules/@makerping/javascript'),'dir');
+  await symlink(fileURLToPath(new URL('../',import.meta.url)),join(directory,'node_modules/@makerping/sdk-javascript'),'dir');
   await writeFile(join(directory,'package.json'),JSON.stringify({private:true,type:'module'}));
   const file=join(directory,'example.mjs');
   await copyFile(new URL('../examples/'+relative,import.meta.url),file);

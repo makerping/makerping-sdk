@@ -2,7 +2,7 @@
 
 ## 0.1.0-beta.4
 
-- Rename the JavaScript and TypeScript package to `@makerping/javascript` and the repository to `makerping-javascript`.
+- Rename the JavaScript and TypeScript package to `@makerping/sdk-javascript` and the repository to `makerping-sdk-javascript`.
 - Update all imports and examples; existing event envelopes, source access and API behavior remain compatible.
 - Keep previous `@makerping/sdk` packages and immutable HTTPS archives available for existing integrations.
 

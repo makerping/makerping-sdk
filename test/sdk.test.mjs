@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import {once} from 'node:events';
 import {createRequire} from 'node:module';
-import {createMakerPing, prepareEvent} from '@makerping/javascript';
-import {createMakerPing as serverEntry} from '@makerping/javascript/server';
-import {createMakerPing as browserEntry} from '@makerping/javascript/browser';
+import {createMakerPing, prepareEvent} from '@makerping/sdk-javascript';
+import {createMakerPing as serverEntry} from '@makerping/sdk-javascript/server';
+import {createMakerPing as browserEntry} from '@makerping/sdk-javascript/browser';
 
 const token = 'mpc_sec_owner.' + 'a'.repeat(32) + '.' + 'b'.repeat(64);
 const collector = token.replace('mpc_sec_', 'mpc_pub_');
@@ -13,7 +13,7 @@ const accepted = body => new Response(JSON.stringify({accepted: true, id: JSON.p
 
 test('public package entries work in ESM and Node require', () => {
   assert.equal(createMakerPing, serverEntry);
-  assert.equal(createRequire(import.meta.url)('@makerping/javascript').createMakerPing, createMakerPing);
+  assert.equal(createRequire(import.meta.url)('@makerping/sdk-javascript').createMakerPing, createMakerPing);
   assert.equal(typeof browserEntry, 'function');
   const event = prepareEvent('integration_checked', {runtime: 'node'}, {environment: 'sandbox'});
   assert.equal(event.version, 1); assert.equal(event.environment, 'sandbox'); assert.ok(Object.isFrozen(event.properties));

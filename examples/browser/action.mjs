@@ -1,4 +1,4 @@
-import {createMakerPing} from '@makerping/javascript/browser';
+import {createMakerPing} from '@makerping/sdk-javascript/browser';
 
 export function connectActions(publicCollector) {
   const ping = createMakerPing({collector: publicCollector, environment: 'sandbox'});

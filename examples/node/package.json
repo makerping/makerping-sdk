@@ -9,6 +9,6 @@
     "start": "node --env-file=.env track.mjs"
   },
   "dependencies": {
-    "@makerping/javascript": "0.1.0-beta.4"
+    "@makerping/sdk-javascript": "0.1.0-beta.4"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "@makerping/javascript",
+  "name": "@makerping/sdk-javascript",
   "version": "0.1.0-beta.4",
   "description": "The JavaScript and TypeScript SDK for explicit MakerPing events, from servers and browsers.",
   "type": "module",
@@ -7,10 +7,10 @@
   "homepage": "https://makerping.com/sdk",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/makerping/makerping-javascript.git"
+    "url": "git+https://github.com/makerping/makerping-sdk-javascript.git"
   },
   "bugs": {
-    "url": "https://github.com/makerping/makerping-javascript/issues"
+    "url": "https://github.com/makerping/makerping-sdk-javascript/issues"
   },
   "keywords": [
     "makerping",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0-beta.4
+
+- Rename the JavaScript and TypeScript package to `@makerping/javascript` and the repository to `makerping-javascript`.
+- Update all imports and examples; existing event envelopes, source access and API behavior remain compatible.
+- Keep previous `@makerping/sdk` packages and immutable HTTPS archives available for existing integrations.
+
 ## 0.1.0-beta.3
 
 - Prepare the public npm release with a `beta` distribution tag, explicit package files and standalone consumer tests.

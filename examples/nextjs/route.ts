@@ -1,5 +1,5 @@
 import 'server-only';
-import {createMakerPing} from '@makerping/sdk';
+import {createMakerPing} from '@makerping/javascript';
 
 // Copy to app/api/makerping-test/route.ts. This test route is local only.
 export const runtime = 'nodejs';

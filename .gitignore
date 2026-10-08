@@ -7,6 +7,7 @@ node_modules/
 !.dev.vars.example
 .wrangler/
 *.tgz
+!releases/*.tgz
 *.log
 .DS_Store
 coverage/

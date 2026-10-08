@@ -1,4 +1,4 @@
-import {createMakerPing} from '@makerping/sdk';
+import {createMakerPing} from '@makerping/javascript';
 
 if (!process.env.MAKERPING_INGEST_TOKEN) {
   console.error('Set MAKERPING_INGEST_TOKEN in your server environment.');

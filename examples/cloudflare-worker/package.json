@@ -2,7 +2,13 @@
   "name": "makerping-worker-example",
   "private": true,
   "type": "module",
-  "scripts": {"start": "wrangler dev --test-scheduled"},
-  "dependencies": {"@makerping/sdk": "0.1.0-beta.3"},
-  "devDependencies": {"wrangler": "4.147.0"}
+  "scripts": {
+    "start": "wrangler dev --test-scheduled"
+  },
+  "dependencies": {
+    "@makerping/javascript": "0.1.0-beta.4"
+  },
+  "devDependencies": {
+    "wrangler": "4.147.0"
+  }
 }

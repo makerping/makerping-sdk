@@ -1,4 +1,4 @@
-import {createMakerPing} from '@makerping/sdk';
+import {createMakerPing} from '@makerping/javascript';
 
 export default {
   async scheduled(_controller, env) {

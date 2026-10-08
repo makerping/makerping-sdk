@@ -1,4 +1,4 @@
-# MakerPing SDK
+# MakerPing JavaScript SDK
 
 Send the business events you choose to your MakerPing activity feed. JavaScript with TypeScript declarations, separate server and browser entries, no dependencies and no installation scripts. MIT licensed.
 
@@ -7,17 +7,23 @@ A MakerPing beta account and a connected source are required. Account registrati
 ## Install
 
 ```sh
-npm install @makerping/sdk@beta
+npm install @makerping/javascript@beta
 ```
 
 Pin an exact version in applications and commit your lockfile. An immutable HTTPS archive is also available from the integration guide. The server entry supports Node.js 22.12+ and Cloudflare Workers; the browser entry works with modern browsers and a bundler. Both entries use native `fetch`.
+
+## Migration from `@makerping/sdk`
+
+This JavaScript SDK now uses the language-specific name `@makerping/javascript`. Install the new package, replace imports of `@makerping/sdk` with `@makerping/javascript` (including `/server` and `/browser`), and remove the old dependency when your application no longer uses it. The event format, API, source access and outbox keys are unchanged. Keep persisted occurrence IDs and envelopes when upgrading.
+
+Previously published `@makerping/sdk` releases and HTTPS archives remain usable. The new name distinguishes this implementation from future SDKs in other languages; no Python or PHP SDK is currently published by this project.
 
 ## Your first server event
 
 Create a **Server** source in MakerPing and save its private ingestion key in `MAKERPING_INGEST_TOKEN`, in your server environment. This key can only send to that source; it cannot read account data or change settings.
 
 ```js
-import {createMakerPing} from '@makerping/sdk';
+import {createMakerPing} from '@makerping/javascript';
 
 const ping = createMakerPing({
   token: process.env.MAKERPING_INGEST_TOKEN,
@@ -36,10 +42,10 @@ A successful receipt means MakerPing stored the occurrence, not that a push noti
 
 ## Examples
 
-- [Node.js](https://github.com/makerping/makerping-sdk/tree/main/examples/node): a complete one-command sandbox test.
-- [Next.js](https://github.com/makerping/makerping-sdk/tree/main/examples/nextjs): a local App Router route, with its token on the server.
-- [Cloudflare Workers](https://github.com/makerping/makerping-sdk/tree/main/examples/cloudflare-worker): a scheduled test with Worker secrets.
-- [Browser](https://github.com/makerping/makerping-sdk/tree/main/examples/browser): an explicit action and consent, using a public collector.
+- [Node.js](https://github.com/makerping/makerping-javascript/tree/main/examples/node): a complete one-command sandbox test.
+- [Next.js](https://github.com/makerping/makerping-javascript/tree/main/examples/nextjs): a local App Router route, with its token on the server.
+- [Cloudflare Workers](https://github.com/makerping/makerping-javascript/tree/main/examples/cloudflare-worker): a scheduled test with Worker secrets.
+- [Browser](https://github.com/makerping/makerping-javascript/tree/main/examples/browser): an explicit action and consent, using a public collector.
 
 Examples live in the source repository; the installed package contains only the SDK, declarations, README, changelog and license.
 
@@ -48,7 +54,7 @@ Examples live in the source repository; the installed package contains only the 
 Create a **Website** source with your exact HTTPS origin. Import the browser entry in your bundled frontend and use its public collector, never a private ingestion key.
 
 ```js
-import {createMakerPing} from '@makerping/sdk/browser';
+import {createMakerPing} from '@makerping/javascript/browser';
 
 const ping = createMakerPing({
   collector: 'YOUR_PUBLIC_COLLECTOR',
@@ -72,7 +78,7 @@ A public collector cannot prove that a signup or sale really occurred. Send conf
 Retries preserve the complete event, including its ID, timestamp and properties. The SDK's queue lives in memory. For durable delivery, prepare the event and persist it in an outbox in the same database transaction as the successful business action:
 
 ```js
-import {prepareEvent} from '@makerping/sdk';
+import {prepareEvent} from '@makerping/javascript';
 
 const event = prepareEvent('export_completed', {format: 'pdf'}, {
   id: opaqueOccurrenceId,

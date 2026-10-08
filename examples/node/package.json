@@ -2,7 +2,13 @@
   "name": "makerping-node-example",
   "private": true,
   "type": "module",
-  "engines": {"node": ">=22.12.0"},
-  "scripts": {"start": "node --env-file=.env track.mjs"},
-  "dependencies": {"@makerping/sdk": "0.1.0-beta.3"}
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "start": "node --env-file=.env track.mjs"
+  },
+  "dependencies": {
+    "@makerping/javascript": "0.1.0-beta.4"
+  }
 }

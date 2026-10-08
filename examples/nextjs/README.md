@@ -2,7 +2,7 @@
 
 In an existing Next.js app using Node.js 22.12+:
 
-1. Install `@makerping/sdk@beta` after npm publication. During preparation, use the archive linked at [makerping.com/sdk](https://makerping.com/sdk).
+1. Install `@makerping/javascript@beta`. The HTTPS archive is also linked at [makerping.com/sdk](https://makerping.com/sdk).
 2. Copy `route.ts` to `app/api/makerping-test/route.ts`.
 3. Put your Server source's key in `.env.local` as `MAKERPING_INGEST_TOKEN`. Never use a `NEXT_PUBLIC_` variable for this key.
 4. Start the app in development and send a POST:

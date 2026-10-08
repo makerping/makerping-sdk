@@ -91,18 +91,20 @@ if (receipt.accepted) await outbox.acknowledge(event.id);
 
 `track()` and `send()` resolve to an accepted or rejected receipt. `prepareEvent()` and invalid client configuration throw `TypeError` before transport.
 
+An accepted receipt's `id` identifies the stored row in MakerPing's journal. It differs from your occurrence ID. Keep `event.id` as your outbox key; rejected receipts use that submitted ID when available.
+
 | Result | Meaning and next step |
 | --- | --- |
 | `accepted: true` | Occurrence stored. `duplicate: true` means an unchanged resend was already received. |
 | `invalid_event` | Correct the name, timestamp, ID or properties before sending. |
-| `invalid_response` | The response did not acknowledge this occurrence. Keep the original event. |
+| `invalid_response` | The response was not a valid acceptance receipt. Keep the original event. |
 | `rate_limited` | Respect `retryAfterMs`; keep the original envelope for a later retry. |
 | `delivery_failed` | Attempts exhausted or delay too long. Resume through your durable queue. |
 | `queue_full` | The in-memory queue is full. Apply backpressure in your application. |
 | `event_rejected` | Inspect `status` and the bounded `code`, if present. Resolve source access or event conflict. |
 | `consent_required` / `privacy_preference` / `consent_denied` | Do not resend refused browser actions. |
 
-Network failures, HTTP 429 and 5xx can be retried within the configured bounds. Other 4xx responses are not retried. A response acknowledges only a matching event ID. HTTP redirects are never followed. A response body, token or contact detail is not copied into error receipts.
+Network failures, HTTP 429 and 5xx can be retried within the configured bounds. Other 4xx responses are not retried. The SDK checks the acceptance flag, receipt ID, duplicate flag and environment when returned. HTTP redirects are never followed. A response body, token or contact detail is not copied into error receipts.
 
 ## Options
 

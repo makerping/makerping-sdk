@@ -49,10 +49,14 @@ test('credentials and sensitive event data fail before transport', async () => {
   assert.equal(calls, 0);
 });
 
-test('mismatched acknowledgements and redirects never mark delivery as accepted', async () => {
+test('server journal IDs are accepted while malformed receipts and redirects are refused', async () => {
   const event = prepareEvent('integration_checked', {}, {id: 'original-event'});
-  const mismatch = createMakerPing({token, fetch: async () => new Response(JSON.stringify({accepted: true, id: 'another-event', duplicate: false}))});
-  assert.equal((await mismatch.send(event)).reason, 'invalid_response');
+  const journal = createMakerPing({token, fetch: async () => new Response(JSON.stringify({accepted: true, id: 'c'.repeat(64), duplicate: false, environment:'production'}))});
+  assert.deepEqual(await journal.send(event), {accepted:true, id:'c'.repeat(64), duplicate:false, attempts:1, status:200});
+  for (const extra of [{id:''}, {id:'<invalid>'}, {duplicate:'false'}, {environment:'sandbox'}]) {
+    const invalid = createMakerPing({token, fetch: async () => new Response(JSON.stringify({accepted:true, id:'c'.repeat(64), duplicate:false, ...extra}))});
+    assert.equal((await invalid.send(event)).reason, 'invalid_response');
+  }
   let options;
   const redirect = createMakerPing({token, fetch: async (_url, init) => {options = init; return new Response(null, {status: 307, headers: {Location: 'https://example.invalid'}});}});
   assert.equal((await redirect.send(event)).accepted, false); assert.equal(options.redirect, 'manual'); assert.equal(options.credentials, 'omit');

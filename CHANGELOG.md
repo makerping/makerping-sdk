@@ -3,7 +3,7 @@
 ## 0.1.0-beta.3
 
 - Prepare the public npm release with a `beta` distribution tag, explicit package files and standalone consumer tests.
-- Reject an acknowledgement for a different occurrence ID instead of marking the event as delivered.
+- Validate receipt IDs and environment while preserving the server journal ID, which is distinct from the submitted occurrence ID.
 - Add an explicit `historical: true` server option. Historical collection requires a compatible MakerPing backend; public browser collectors refuse it before any request.
 - Add Node.js, Next.js and Cloudflare Workers sandbox examples.
 - Preserve the event envelope across retries and persistent outbox delivery.

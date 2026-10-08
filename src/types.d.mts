@@ -11,6 +11,7 @@ export interface MakerPingEvent {
   readonly historical?: boolean;
   readonly properties: Properties;
 }
+/** Accepted IDs identify server journal receipts; rejected IDs identify the submitted occurrence. */
 export type Receipt =
   | {accepted: true; id: string; duplicate: boolean; attempts: number; status: number}
   | {accepted: false; reason: string; code?: string; id?: string; attempts?: number; status?: number; retryAfterMs?: number};

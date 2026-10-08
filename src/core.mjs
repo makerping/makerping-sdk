@@ -86,7 +86,9 @@ export function createSender(config, url, headers = {}) {
       let response, data;
       try { ({response, data} = await request(config, url, {method: 'POST', headers: {'Content-Type': 'application/json', ...headers}, body})); } catch { /* Network failures are reported without exposing request details. */ }
       if (response?.ok) {
-        if (data?.accepted === true && data.id === event.id && typeof data.duplicate === 'boolean') {
+        // The server receipt ID identifies the workspace-scoped journal row;
+        // it is distinct from the occurrence ID in the submitted envelope.
+        if (data?.accepted === true && typeof data.id === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,119}$/.test(data.id) && typeof data.duplicate === 'boolean' && (data.environment === undefined || data.environment === event.environment)) {
           return {accepted: true, id: data.id, duplicate: data.duplicate, attempts: attempt, status: response.status};
         }
         return rejected('invalid_response', event.id, {attempts: attempt, status: response.status});
